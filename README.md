@@ -117,7 +117,6 @@ A aplicação possui breakpoints para:
 | react-dom    | ^18.2.0  | Renderização          | MIT        |
 | axios        | ^1.3.4   | Chamadas HTTP         | MIT        |
 | font-awesome | ^6.4.0   | Ícones                | CC BY 4.0  |
-| [Outro]      | [versão] | [função]              | [licença]  |
 
 ## 📄 Licença
 Este projeto está licenciado sob a Licença MIT
@@ -126,4 +125,4 @@ Desenvolvido por João Gabriel Santos de Jesus
 
 📧 Contato: joaogabrielsj2004@gmail.com
 
-🔗 LinkedIn: !["linkedin.com/in/joao-gabriel-jesus/"](linkedin.com/in/joao-gabriel-jesus/)
+🔗 LinkedIn: linkedin.com/in/joao-gabriel-jesus/
