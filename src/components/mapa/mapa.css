@@ -1,0 +1,32 @@
+.Mapa {
+    width: 100%;
+    border-right: 1px black dashed;
+
+    .estado {
+        stroke: black;
+    }
+
+    .nordeste {
+        fill: rgb(244, 255, 85);
+    }
+
+    .sudeste {
+        fill: rgb(53, 111, 197);
+    }
+
+    .norte {
+        fill: rgb(54, 194, 73);
+    }
+
+    .sul {
+        fill: rgb(131, 131, 131);
+    }
+
+    .centro {
+        fill: rgb(141, 202, 49);
+    }
+
+    .df {
+        fill: rgb(77, 77, 77) !important;
+    }
+}

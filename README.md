@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+# 📍 Mapa Interativo de Grupos de Pesquisa - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">
+  <img src="https://img.shields.io/badge/react-18.2.0-blue" alt="React">
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
+</div>
 
-## Available Scripts
+Aplicação frontend para visualização de grupos de pesquisa por estado do Brasil, integrada com um backend Node.js/Firebase.
 
-In the project directory, you can run:
+![Screenshot da Aplicação](https://screenshot.png) <!-- Substitua por uma imagem real -->
 
-### `npm start`
+## ✨ Funcionalidades
+- Mapa interativo do Brasil com SVG
+- Visualização detalhada de grupos de pesquisa
+- Filtros por área de atuação
+- Links para contato e redes sociais
+- Layout responsivo para mobile
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠 Estrutura do Projeto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```json
+frontend/
+├── public/
+├── src/
+│ ├── components/
+│ │ ├── mapa/
+│ │ │ └── mapa.js # Componente do SVG interativo
+│ │ │ └── mapa.css # Estilos do mapa
+│ │ └── info/
+│ │ └── info.js # Card de informações
+│ │ └── info.css # Estilos dos cards
+│ ├── services/
+│ │ └── mapaEventos.js # Tratamento de clicks do mapa e gerenciamento de informações
+│ ├── services/
+│ │ └── api.js # Conexão com o backend
+│ │ └── cache.js # Armazenamento em cache
+│ ├── App.js
+│ ├── index.js
+│ └── styles/
+│ ├── index.css # Estilos globais
+├── .env
+└── package.json
+```
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🔌 Integração com o Backend
 
-### `npm run build`
+### Endpoints utilizados:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+| Método | Endpoint           | Descrição               |
+|--------|--------------------|-------------------------|
+| GET    | `/:estado`         | Busca grupos por estado |
+| POST   | `/:estado/grupos`  | Cadastra novo grupo     |
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Estrutura dos Dados
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```json
+{
+  "id": "string",
+  "nome": "string",
+  "sigla": "string?",
+  "instituicao": "string",
+  "cidade": "string",
+  "areasConcentracao": ["string"],
+  "email": "string",
+  "website": "string?",
+  "redes": {
+    "lattes": "string?",
+    "linkedin": "string?"
+  }
+}
+```
 
-### `npm run eject`
+## 🚀 Como Executar
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Clone o repositório:
+```
+git clone https://github.com/joaogabrielsj2004/mapa-interativo.git
+cd mapa-interativo/frontend
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Instale as dependências:
+```
+npm install
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Configure o ambiente:
+```
+cp .env.example .env
+```
+Edite o .env com a URL do seu backend:
+```
+REACT_APP_API_URL= link_backend
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. Inicie a aplicação:
+```
+npm start
+```
 
-## Learn More
+### Componente do Mapa
+Para ajustar:
+- Edite src/components/mapa/brasil.svg
+- Atualize os eventos em src/components/mapa/mapa.js
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📱 Responsividade
+A aplicação possui breakpoints para:
+- Desktop: > 1024px
+- Tablet: 768px - 1024px
+- Mobile: < 768px
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📚 Dependências Principais
 
-### Code Splitting
+| Pacote       | Versão   | Uso                   | Licença    |
+|--------------|----------|-----------------------|------------|
+| react        | ^18.2.0  | Biblioteca principal  | MIT        |
+| react-dom    | ^18.2.0  | Renderização          | MIT        |
+| axios        | ^1.3.4   | Chamadas HTTP         | MIT        |
+| font-awesome | ^6.4.0   | Ícones                | CC BY 4.0  |
+| [Outro]      | [versão] | [função]              | [licença]  |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📄 Licença
+Este projeto está licenciado sob a Licença MIT
 
-### Analyzing the Bundle Size
+Desenvolvido por [Seu Nome]
+📧 Contato: joaogabrielsj2004@gmail.com
+🔗 LinkedIn: linkedin.com/in/joao-gabriel-jesus/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

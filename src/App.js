@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Mapa from './components/mapa/mapa';
+import Info from './components/info/info';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [dadosEstado, setDadosEstado] = useState(null);
+
+    // Função para forçar reset quando necessário
+    const handleEstadoSelecionado = (novosDados) => {
+        // Cria um novo objeto para forçar a atualização
+        setDadosEstado(novosDados ? { ...novosDados } : null);
+    };
+
+    return (
+        <div className="main-div">
+            <Mapa onEstadoSelecionado={setDadosEstado} />
+            <Info dados={dadosEstado} />
+        </div>
+    );
+};
 
 export default App;
