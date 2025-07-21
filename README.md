@@ -18,7 +18,7 @@ Aplicação frontend para visualização de grupos de pesquisa por estado do Bra
 
 ## 🛠 Estrutura do Projeto
 
-```json
+```
 frontend/
 ├── public/
 ├── src/
