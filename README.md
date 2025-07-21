@@ -7,7 +7,7 @@
 
 Aplicação frontend para visualização de grupos de pesquisa por estado do Brasil, integrada com um backend Node.js/Firebase.
 
-![Screenshot da Aplicação](https://screenshot.png) <!-- Substitua por uma imagem real -->
+
 
 ## ✨ Funcionalidades
 - Mapa interativo do Brasil com SVG
@@ -122,7 +122,8 @@ A aplicação possui breakpoints para:
 ## 📄 Licença
 Este projeto está licenciado sob a Licença MIT
 
-Desenvolvido por [Seu Nome]
-📧 Contato: joaogabrielsj2004@gmail.com
-🔗 LinkedIn: linkedin.com/in/joao-gabriel-jesus/
+Desenvolvido por João Gabriel Santos de Jesus
 
+📧 Contato: joaogabrielsj2004@gmail.com
+
+🔗 LinkedIn: !["linkedin.com/in/joao-gabriel-jesus/"](linkedin.com/in/joao-gabriel-jesus/)
