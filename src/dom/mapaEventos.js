@@ -14,13 +14,21 @@ export function configurarEventos(estadoAtivoRef, onEstadoSelecionado) {
 
   const removerHover = (el) => {
     el.style.transform = 'scale(1)';
-    el.style.fill = el.dataset.fillOriginal || '';
   };
 
   const clickEstado = async (el) => {
     const nome = el.dataset.nome;
     const codigo = el.dataset.codigo;
     const link = el.dataset.link;
+
+    // Remove a cor do estado anterior (se existir)
+    if (estadoAtivoRef.current) {
+      estadoAtivoRef.current.style.fill = estadoAtivoRef.current.dataset.fillOriginal || '';
+    }
+
+    // Aplica a cor ao novo estado clicado
+    el.style.fill = '#fc9d03';
+    estadoAtivoRef.current = el;
 
     try {
       // Verifica cache e necessidade de atualização
@@ -73,16 +81,16 @@ export function configurarEventos(estadoAtivoRef, onEstadoSelecionado) {
     el.parentNode.replaceChild(novo, el);
 
     novo.addEventListener('mouseenter', () => {
-      if (estadoAtivoRef.current !== novo) aplicarHover(novo);
+      aplicarHover(novo);
     });
 
     novo.addEventListener('mouseleave', () => {
-      if (estadoAtivoRef.current !== novo) removerHover(novo);
+      removerHover(novo);
     });
 
     novo.addEventListener('click', async (e) => { // Tornada async
       e.stopPropagation();
-      await clickEstado(e.currentTarget); // Aguarda a conclusão
+      await clickEstado(e.currentTarget);
     });
   });
 }

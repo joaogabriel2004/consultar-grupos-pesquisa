@@ -7,9 +7,7 @@ const Mapa = ({onEstadoSelecionado }) => {
   const estadoAtivoRef = useRef(null);
 
   useEffect(() => {
-    configurarEventos(estadoAtivoRef);
     if (svgRef.current) {
-      
       configurarEventos(estadoAtivoRef, onEstadoSelecionado);
     }
   }, []);
