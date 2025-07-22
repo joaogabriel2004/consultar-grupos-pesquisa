@@ -100,8 +100,8 @@ npm start
 
 ### Componente do Mapa
 Para ajustar:
-- Edite src/components/mapa/brasil.svg
-- Atualize os eventos em src/components/mapa/mapa.js
+- Edite src/components/mapa/mapa.js
+- Atualize os eventos em src/components/mapa/mapaEventos.js
 
 ## 📱 Responsividade
 A aplicação possui breakpoints para:
