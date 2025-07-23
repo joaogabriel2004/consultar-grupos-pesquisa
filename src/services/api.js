@@ -1,8 +1,7 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL;
+const API_BASE_URL = `${process.env.REACT_APP_API_URL}/api`;
 
 export const getGruposPorEstado = async (estado) => {
     try {
-      console.log(process.env)
       const response = await fetch(`${API_BASE_URL}/${encodeURIComponent(estado)}`);
       if (!response.ok) throw new Error('Erro ao buscar dados');
       return await response.json();
