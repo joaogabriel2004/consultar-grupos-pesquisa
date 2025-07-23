@@ -5,13 +5,19 @@ const CHECK_INTERVAL = 5 * 60 * 1000; // 5 minutos
 // Função principal para "acordar" o backend
 export const wakeBackend = async () => {
   try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
     const response = await fetch(BACKEND_URL, {
-      method: 'HEAD', // Chamada leve
+      method: 'HEAD',
       cache: 'no-store',
+      signal: controller.signal
     });
+
+    clearTimeout(timeoutId);
     return response.ok;
   } catch (error) {
-    console.warn('Backend está iniciando... (pode levar até 30s no Render)');
+    console.warn('Backend response:', error.name);
     return false;
   }
 };

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Mapa from './components/mapa/mapa';
 import Info from './components/info/info';
+import BackendLoader from './components/backendLoader/backendLoader';
 import { wakeBackend, startKeepAlive } from './services/backendWakeup';
 
 
@@ -23,10 +24,12 @@ const App = () => {
 
 
     return (
-        <div className="main-div">
-            <Mapa onEstadoSelecionado={setDadosEstado} />
-            <Info dados={dadosEstado} />
-        </div>
+        <BackendLoader >
+            <div className="main-div">
+                <Mapa onEstadoSelecionado={setDadosEstado} />
+                <Info dados={dadosEstado} />
+            </div>
+        </BackendLoader>
     );
 };
 
