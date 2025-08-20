@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './info.css';
 import InfoFilter from './infoFilter';
+import FormGrupo from '../formGrupo/formGrupo';
 
 const Info = ({ dados }) => {
   const [filtro, setFiltro] = useState('');
@@ -17,6 +18,14 @@ const Info = ({ dados }) => {
       setGruposFiltrados(dados.grupos);
     }
   }, [dados, filtro]);
+
+  const [grupoEditando, setGrupoEditando] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSave = (grupoAtualizado) => {
+    console.log("Grupo atualizado:", grupoAtualizado);
+    // aqui você poderia chamar uma API ou atualizar estado global
+  };
     
   // Se não houver dados, mostra mensagem padrão
   if (!dados) {
@@ -172,6 +181,7 @@ const Info = ({ dados }) => {
                   href="#"
                   rel="noopener noreferrer" 
                   className="btn btn-edit"
+                  onClick={() => setGrupoEditando(grupo)} 
                   title="Editar"
                 >
                   <i class="fas fa-edit"></i> Editar
@@ -182,6 +192,14 @@ const Info = ({ dados }) => {
           </div>
         ))}
       </div>
+
+      <FormGrupo 
+        grupo={grupoEditando} 
+        isOpen={!!grupoEditando} 
+        onClose={() => setGrupoEditando(null)} 
+        onSave={handleSave}
+      />
+
     </div>
   );
 };
