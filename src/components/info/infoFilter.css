@@ -1,0 +1,57 @@
+.info-filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.filtros-pesquisar {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.info-filter input {
+    flex: 0.7;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.btn-cache{
+  color: white;
+  background-color: #3498db
+}
+
+.btn-cache:hover {
+  background-color: #2980b9;
+}
+
+.btn-filtrar{
+  color: white;
+  background-color: #3498db
+}
+
+.btn-filtrar:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .info-filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .filtros-pesquisar {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .info-filter input {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}

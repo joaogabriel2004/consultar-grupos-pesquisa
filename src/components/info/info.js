@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './info.css';
+import InfoFilter from './infoFilter';
 
 const Info = ({ dados }) => {
+  const [filtro, setFiltro] = useState('');
+  const [gruposFiltrados, setGruposFiltrados] = useState(dados?.grupos || []);
+
+  useEffect(() => {
+    if (dados && filtro) {
+      setGruposFiltrados(
+        dados.grupos.filter(grupo =>
+          grupo.nome.toLowerCase().includes(filtro.toLowerCase())
+        )
+      );
+    } else if (dados) {
+      setGruposFiltrados(dados.grupos);
+    }
+  }, [dados, filtro]);
+    
   // Se não houver dados, mostra mensagem padrão
   if (!dados) {
     return (
@@ -37,11 +53,13 @@ const Info = ({ dados }) => {
         <h2 className="info-title">
           <i className="fas fa-map-marker-alt"></i> Grupos em <span>{dados.estado}</span>
         </h2>
-        <div className="info-count">{dados.grupos.length} grupo(s) encontrado(s)</div>
+        <div className="info-count">{gruposFiltrados.length} grupo(s) encontrado(s)</div>
+
+        <InfoFilter onFiltrar={setFiltro}/>
       </div>
 
       <div className="grupos-lista">
-        {dados.grupos.map(grupo => (
+        {gruposFiltrados.map(grupo => (
           <div key={grupo.id} className="grupo-card">
             <div className="grupo-header">
               {grupo.logo && (
@@ -149,6 +167,16 @@ const Info = ({ dados }) => {
                     </div>
                   </div>
                 )}
+
+                <a 
+                  href="#"
+                  rel="noopener noreferrer" 
+                  className="btn btn-edit"
+                  title="Editar"
+                >
+                  <i class="fas fa-edit"></i> Editar
+                  
+                </a>
               </div>
             </div>
           </div>
