@@ -1,0 +1,56 @@
+/* Formulário */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-form label {
+  display: block;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.login-form input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+}
+
+.login-form input::placeholder {
+  color: #9ca3af;
+}
+
+.login-form input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+  background-color: #f9fafb;
+}
+
+
+/* Erros */
+.error-text {
+  margin-top: -4px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(8px); opacity: 0.98 }
+  to   { transform: translateY(0);   opacity: 1 }
+}

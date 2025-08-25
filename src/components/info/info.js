@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './info.css';
 import InfoFilter from './infoFilter';
 import FormGrupo from '../formGrupo/formGrupo';
+import LoginModal from "../loginModal/loginModal";
 
 const Info = ({ dados }) => {
   const [filtro, setFiltro] = useState('');
   const [gruposFiltrados, setGruposFiltrados] = useState(dados?.grupos || []);
+  const [grupoEditando, setGrupoEditando] = useState(null);
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     if (dados && filtro) {
@@ -19,15 +23,41 @@ const Info = ({ dados }) => {
     }
   }, [dados, filtro]);
 
-  const [grupoEditando, setGrupoEditando] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // Verifica se já existe token no localStorage
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const handleSave = (grupoAtualizado) => {
     console.log("Grupo atualizado:", grupoAtualizado);
-    // aqui você poderia chamar uma API ou atualizar estado global
   };
-    
-  // Se não houver dados, mostra mensagem padrão
+
+  const handleLogin = async ({ email, password }) => {
+    const res = await fetch("https://backendconsultar-grupos-pesquisa.onrender.com/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (!data.success) {
+      throw new Error(data.message);
+    }
+
+    localStorage.setItem("token", data.idToken);
+    setIsLoggedIn(true);
+    setIsLoginOpen(false);
+    console.log("Login ok:", data);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+  };
+
   if (!dados) {
     return (
       <div className="info-container info-vazio">
@@ -40,7 +70,6 @@ const Info = ({ dados }) => {
     );
   }
 
-  // Se houver dados mas nenhum grupo
   if (dados.grupos.length === 0) {
     return (
       <div className="info-container">
@@ -55,7 +84,6 @@ const Info = ({ dados }) => {
     );
   }
 
-  // Caso normal com grupos
   return (
     <div className="info-container">
       <div className="info-header">
@@ -63,7 +91,7 @@ const Info = ({ dados }) => {
           <i className="fas fa-map-marker-alt"></i> Grupos em <span>{dados.estado}</span>
         </h2>
         <div className="info-count">{gruposFiltrados.length} grupo(s) encontrado(s)</div>
-
+  
         <InfoFilter onFiltrar={setFiltro}/>
       </div>
 
@@ -77,7 +105,7 @@ const Info = ({ dados }) => {
                   alt={`Logo ${grupo.nome}`} 
                   className="grupo-logo" 
                   onError={(e) => {
-                    e.target.src = 'https://media.istockphoto.com/id/2147589548/pt/vetorial/white-gradient-background-abstract-studio-presentation-product-vector-illustration.jpg?s=612x612&w=0&k=20&c=Qcxn7yW_qtfdB-1ABHojTxK6AdwJXXBeGaeIK-nU2OA=';
+                    e.target.src = 'https://media.istockphoto.com/id/2147589548/pt/vetorial/white-gradient-background-abstract-studio-presentation-product-vector-illustration.jpg';
                   }}
                 />
               )}
@@ -177,20 +205,45 @@ const Info = ({ dados }) => {
                   </div>
                 )}
 
-                <a 
-                  href="#"
-                  rel="noopener noreferrer" 
-                  className="btn btn-edit"
-                  onClick={() => setGrupoEditando(grupo)} 
-                  title="Editar"
-                >
-                  <i class="fas fa-edit"></i> Editar
-                  
-                </a>
+                {isLoggedIn && (
+                  <a 
+                    href="#"
+                    rel="noopener noreferrer" 
+                    className="btn btn-edit"
+                    onClick={() => setGrupoEditando(grupo)} 
+                    title="Editar"
+                  >
+                    <i className="fas fa-edit"></i> Editar
+                  </a>
+                )}
               </div>
             </div>
           </div>
         ))}
+
+        <div>
+          {!isLoggedIn ? (
+            <a 
+              href="#"
+              rel="noopener noreferrer" 
+              className="btn btn-edit"
+              onClick={() => setIsLoginOpen(true)}
+              title="Entrar"
+            >
+              <i className="fas fa-user"></i> Entrar
+            </a>
+          ) : (
+            <a 
+              href="#"
+              rel="noopener noreferrer" 
+              className="btn btn-edit"
+              onClick={handleLogout}
+              title="Sair"
+            >
+              <i className="fas fa-sign-out-alt"></i> Sair
+            </a>
+          )}
+        </div>
       </div>
 
       <FormGrupo 
@@ -200,6 +253,11 @@ const Info = ({ dados }) => {
         onSave={handleSave}
       />
 
+      <LoginModal
+        isOpen={isLoginOpen}
+        onClose={() => setIsLoginOpen(false)}
+        onLogin={handleLogin}
+      />
     </div>
   );
 };
